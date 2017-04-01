@@ -1,0 +1,39 @@
+<article id="article-post" class="post">
+    <div class="post-inner-wrap">
+        <% if (page.layout != "page"){ %>
+        <h1 id="page-title"><%= page.title %></h1>
+
+        <ul class="post-meta list-inline">
+            <li>时间：<time><%= date(page.date, 'YYYY-MM-DD') %></time></li>
+            <% if (page.tags && page.tags.length){ %>
+            <li>
+                <%- list_tags(page.tags, {
+                    'show_count': false,
+                    'class': 'post-tags'
+                }) %>
+            </li>
+            <% } %>
+        </ul>
+        <% } %>
+
+        <div class="content">
+            <%- page.content %>
+        </div>
+    </div>
+</article>
+<% if (page.prev || page.next){ %>
+<nav id="article-nav">
+    <ul class="list-unstyled">
+        <li>
+            <% if (page.prev) { %>
+            <a href="<%- url_for(page.prev.path) %>" class="prev" data-title="<%= page.prev.title %>"></a>
+            <% } %>
+        </li>
+        <li>
+            <% if (page.next) { %>
+            <a href="<%- url_for(page.next.path) %>" class="next" data-title="<%= page.next.title %>"></a>
+            <% } %>
+        </li>
+    </ul>
+</nav>
+<% } %>
